@@ -7,18 +7,37 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import FavoriteIndicator from "./favoriteJobs/FavoriteIndicator";
 
 const MyNavBar = ({ text, setText, getJob }) => {
   return (
-    <Navbar bg="dark" expand="lg">
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+    <Navbar expand="lg" className="NavBar">
+      <Navbar.Brand className="text-white" href="#home">
+        Weenix JobEngine
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#link">Link</Nav.Link>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Marketing</NavDropdown.Item>
+          <Link to="/">
+            <Nav.Link className="text-white" href="#home">
+              Home
+            </Nav.Link>
+          </Link>
+          <Link to="/favorite">
+            <Nav.Link className="text-white" href="#link">
+              Favorite
+            </Nav.Link>
+          </Link>
+          <FavoriteIndicator />
+          <NavDropdown
+            title="Dropdown"
+            id="basic-nav-dropdown"
+            style={{ color: "white!important" }}
+          >
+            <NavDropdown.Item className="text-white" href="#action/3.1">
+              Marketing
+            </NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">Business</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">
               Finance / Legal

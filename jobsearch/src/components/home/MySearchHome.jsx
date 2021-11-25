@@ -3,9 +3,9 @@ import JobStore from "../JobStore";
 import MyNavBar from "../MyNavBar";
 import { useNavigate } from "react-router-dom";
 
-const MySearchHome = () => {
+const MySearchHome = ({ jobs, setJobs }) => {
   const navigate = useNavigate();
-  const [text, setText] = useState({
+  /*  const [text, setText] = useState({
     text: "",
   });
   const [jobs, setJobs] = useState([]);
@@ -27,10 +27,10 @@ const MySearchHome = () => {
 
   useEffect(() => {
     fetchJobs();
-  }, []);
+  }, []); */
   return (
     <>
-      <MyNavBar text={text} setText={setText} getJob={fetchJobs} />
+      {/* <MyNavBar text={text} setText={setText} getJob={fetchJobs} /> */}
       <JobStore jobs={jobs} setJobs={setJobs} />
     </>
   );

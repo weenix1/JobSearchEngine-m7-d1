@@ -2,45 +2,35 @@ import { useState, useEffect } from "react";
 import { Row, Col, ListGroup } from "react-bootstrap";
 import JobCard from "./JobCard";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { addToFavoriteAction } from "../actions";
 
-const JobStore = ({ jobs }) => {
+const mapStateToProps = (state) => ({
+  favorite: state.favorite.jobs,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addToFavorite: (jobToAdd) => {
+    dispatch(addToFavoriteAction(jobToAdd));
+  },
+});
+
+const JobStore = ({ jobs, addToFavorite }) => {
   /*  const [jobs, setJobs] = useState([]); */
   const [jobSelected, setJobSelected] = useState(null);
 
-  /* const fetchJobs = async () => {
-    try {
-      let response = await fetch(
-        "https://strive-jobs-api.herokuapp.com/jobs?limit=10&skip=10"
-      );
-      if (response.ok) {
-        let jobData = await response.json();
-        setJobs(jobData.data);
-      } else {
-        console.log("error");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchJobs();
-  }, []); */
-
-  /*  const changeJob = (job) => setJobSelected({ jobSelected: job }); */
   return (
     <Row>
       {jobs.map((job) => (
         <Col sm={6}>
           <ListGroup as="ul">
             <ListGroup.Item as="li" className="mb-3">
-              <Link to={`/${job.company_name}`}>
-                <JobCard
-                  job={job}
-                  /* changeJob={changeJob} */
-                  jobSelected={jobSelected}
-                />
-              </Link>
+              <JobCard
+                job={job}
+                /* changeJob={changeJob} */
+                jobSelected={jobSelected}
+                addToFavorite={addToFavorite}
+              />
             </ListGroup.Item>
           </ListGroup>
         </Col>
@@ -49,4 +39,4 @@ const JobStore = ({ jobs }) => {
   );
 };
 
-export default JobStore;
+export default connect(mapStateToProps, mapDispatchToProps)(JobStore);

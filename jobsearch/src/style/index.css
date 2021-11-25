@@ -1,0 +1,23 @@
+.NavBar {
+  background-color: black !important;
+  margin-bottom: 20px;
+}
+/* body {
+  background-color: rgb(129, 125, 125) !important;
+} */
+
+.card-body {
+  background-color: rgb(14, 255, 175);
+}
+
+.loveSvg:hover {
+  color: red;
+}
+
+.card-footer {
+  background-color: bisque;
+}
+
+#basic-nav-dropdown {
+  color: #fff;
+}
