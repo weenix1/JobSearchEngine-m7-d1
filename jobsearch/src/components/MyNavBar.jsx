@@ -69,7 +69,7 @@ const MyNavBar = ({ text, setText, getJob }) => {
             placeholder="Search for jobs"
             className="mr-sm-2"
           />
-          <Button variant="outline-success" onClick={() => getJob()}>
+          <Button variant="outline-success" onClick={() => getJob(text)}>
             Search
           </Button>
         </Form>

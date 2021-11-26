@@ -8,13 +8,27 @@ import MySearchHome from "./components/home/MySearchHome";
 import MyNavBar from "./components/MyNavBar";
 import { useState, useEffect } from "react";
 import FavoriteIndicator from "./components/favoriteJobs/FavoriteIndicator";
+import { connect } from "react-redux";
+import { getJobsAction } from "./actions";
 
-const App = () => {
+const mapStateToProps = (state) => ({
+  jobInJobList: state.jobs.jobList,
+  jobsError: state.jobs.isError,
+  jobsLoading: state.jobs.isLoading,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getJobs: (text) => {
+    dispatch(getJobsAction(text));
+  },
+});
+
+const App = ({ getJobs, jobInJobList, jobsError, jobsLoading }) => {
   const [text, setText] = useState({
     text: "",
   });
   const [jobs, setJobs] = useState([]);
-  const fetchJobs = async () => {
+  /*  const fetchJobs = async () => {
     try {
       let response = await fetch(
         `https://strive-jobs-api.herokuapp.com/jobs?search=${text.text}&limit=10`
@@ -28,10 +42,11 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
 
   useEffect(() => {
-    fetchJobs();
+    /*  fetchJobs(); */
+    getJobs(text);
   }, []);
 
   return (
@@ -39,7 +54,7 @@ const App = () => {
       {/* <Link to="/:company">
         <MyNavBar />
       </Link> */}
-      <MyNavBar text={text} setText={setText} getJob={fetchJobs} />
+      <MyNavBar text={text} setText={setText} getJob={getJobs} />
       {/* <div className="d-flex justify-content-end">
         <FavoriteIndicator />
       </div> */}
@@ -47,7 +62,7 @@ const App = () => {
         <Route
           path="/"
           exact
-          element={<MySearchHome jobs={jobs} setJobs={jobs} />}
+          element={<MySearchHome jobs={jobInJobList} setJobs={jobInJobList} />}
         />
         <Route path="/:company" exact element={<Company />} />
         <Route path="/favorite" exact element={<Favorite />} />
@@ -56,4 +71,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

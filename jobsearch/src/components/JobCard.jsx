@@ -9,6 +9,7 @@ const JobCard = ({
   navigate,
 }) => (
   <Container>
+    {}
     <Card
       // the ? is called OPTIONAL CHAINING
       className={jobSelected?._id === job._id ? "border-thick mt-3" : "mt-3"}
