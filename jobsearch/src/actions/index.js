@@ -21,6 +21,7 @@ export const removeFromFavoriteAction = (indexToRemove) => ({
   type: REMOVE_FROM_FAVORITE,
   payload: indexToRemove,
 });
+
 // the function returns an object, so you can dispatch it INSTEAD of dispatching the object
 
 export const getJobsAction = (text) => {
