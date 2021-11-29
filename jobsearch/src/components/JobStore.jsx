@@ -3,25 +3,31 @@ import { Row, Col, ListGroup, Spinner, Alert } from "react-bootstrap";
 import JobCard from "./JobCard";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { addToFavoriteAction } from "../actions";
+
 import ReactPlaceholder from "react-placeholder";
 import "react-placeholder/lib/reactPlaceholder.css";
+import { useSelector, useDispatch } from "react-redux";
 
-const mapStateToProps = (state) => ({
+/* const mapStateToProps = (state) => ({
   favorite: state.favorite.jobs,
   jobsError: state.jobs.isError,
   jobsLoading: state.jobs.isLoading,
-});
+}); */
 
-const mapDispatchToProps = (dispatch) => ({
+/* const mapDispatchToProps = (dispatch) => ({
   addToFavorite: (jobToAdd) => {
     dispatch(addToFavoriteAction(jobToAdd));
   },
-});
+}); */
 
-const JobStore = ({ jobs, addToFavorite, jobsLoading, jobsError }) => {
+const JobStore = () => {
   /*  const [jobs, setJobs] = useState([]); */
+  const dispatch = useDispatch();
   const [jobSelected, setJobSelected] = useState(null);
+  const jobs = useSelector((state) => state.jobs.jobList);
+  console.log(jobs);
+  const jobsError = useSelector((state) => state.jobs.isError);
+  const jobsLoading = useSelector((state) => state.jobs.isLoading);
 
   return (
     <Row>
@@ -57,7 +63,7 @@ const JobStore = ({ jobs, addToFavorite, jobsLoading, jobsError }) => {
                       job={job}
                       /* changeJob={changeJob} */
                       jobSelected={jobSelected}
-                      addToFavorite={addToFavorite}
+                      addToFavorite={dispatch}
                     />
                   </ListGroup.Item>
                 </ListGroup>
@@ -70,4 +76,5 @@ const JobStore = ({ jobs, addToFavorite, jobsLoading, jobsError }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobStore);
+export default JobStore;
+//export default connect(mapStateToProps, mapDispatchToProps)(JobStore);

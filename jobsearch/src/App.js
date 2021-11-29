@@ -8,22 +8,23 @@ import MySearchHome from "./components/home/MySearchHome";
 import MyNavBar from "./components/MyNavBar";
 import { useState, useEffect } from "react";
 import FavoriteIndicator from "./components/favoriteJobs/FavoriteIndicator";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { getJobsAction } from "./actions";
 
-const mapStateToProps = (state) => ({
+/* const mapStateToProps = (state) => ({
   jobInJobList: state.jobs.jobList,
   jobsError: state.jobs.isError,
   jobsLoading: state.jobs.isLoading,
 });
-
-const mapDispatchToProps = (dispatch) => ({
+ */
+/* const mapDispatchToProps = (dispatch) => ({
   getJobs: (text) => {
     dispatch(getJobsAction(text));
   },
-});
+}); */
 
-const App = ({ getJobs, jobInJobList, jobsError, jobsLoading }) => {
+const App = () => {
+  const dispatch = useDispatch();
   const [text, setText] = useState({
     text: "",
   });
@@ -46,7 +47,7 @@ const App = ({ getJobs, jobInJobList, jobsError, jobsLoading }) => {
 
   useEffect(() => {
     /*  fetchJobs(); */
-    getJobs(text);
+    dispatch(getJobsAction(text));
   }, []);
 
   return (
@@ -54,7 +55,7 @@ const App = ({ getJobs, jobInJobList, jobsError, jobsLoading }) => {
       {/* <Link to="/:company">
         <MyNavBar />
       </Link> */}
-      <MyNavBar text={text} setText={setText} getJob={getJobs} />
+      <MyNavBar text={text} setText={setText} getJob={dispatch} />
       {/* <div className="d-flex justify-content-end">
         <FavoriteIndicator />
       </div> */}
@@ -62,7 +63,9 @@ const App = ({ getJobs, jobInJobList, jobsError, jobsLoading }) => {
         <Route
           path="/"
           exact
-          element={<MySearchHome jobs={jobInJobList} setJobs={jobInJobList} />}
+          element={
+            <MySearchHome /* jobs={jobInJobList} setJobs={jobInJobList} */ />
+          }
         />
         <Route path="/:company" exact element={<Company />} />
         <Route path="/favorite" exact element={<Favorite />} />
@@ -71,4 +74,5 @@ const App = ({ getJobs, jobInJobList, jobsError, jobsLoading }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
+//export default connect(mapStateToProps, mapDispatchToProps)(App);

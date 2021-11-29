@@ -1,6 +1,7 @@
 import { Card, Container } from "react-bootstrap";
 import JobDetails from "./JobDetails";
 import { Link } from "react-router-dom";
+import { addToFavoriteAction } from "../actions";
 
 const JobCard = ({
   job,
@@ -40,7 +41,11 @@ const JobCard = ({
             </div>
           </div>
         </Card.Body>
-        <div className="loveSvg mr-2" onClick={() => addToFavorite(job)}>
+
+        <div
+          className="loveSvg mr-2"
+          onClick={() => addToFavorite(addToFavoriteAction(job))}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

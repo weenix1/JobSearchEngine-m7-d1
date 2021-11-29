@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import FavoriteIndicator from "./favoriteJobs/FavoriteIndicator";
+import { getJobsAction } from "../actions";
 
 const MyNavBar = ({ text, setText, getJob }) => {
   return (
@@ -69,7 +70,10 @@ const MyNavBar = ({ text, setText, getJob }) => {
             placeholder="Search for jobs"
             className="mr-sm-2"
           />
-          <Button variant="outline-success" onClick={() => getJob(text)}>
+          <Button
+            variant="outline-success"
+            onClick={() => getJob(getJobsAction(text))}
+          >
             Search
           </Button>
         </Form>

@@ -2,8 +2,19 @@ import { useState, useEffect } from "react";
 import JobStore from "../JobStore";
 import MyNavBar from "../MyNavBar";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-const MySearchHome = ({ jobs, setJobs }) => {
+/* const mapStateToProps = (state) => ({
+  jobInJobList: state.jobs.jobList,
+  jobsError: state.jobs.isError,
+  jobsLoading: state.jobs.isLoading,
+}); */
+
+const MySearchHome = () => {
+  /*   const jobs = useSelector((state) => state.jobs.jobs);
+  const jobsError = useSelector((state) => state.jobs.isError);
+  const jobsLoading = useSelector((state) => state.jobs.isLoading); */
+
   const navigate = useNavigate();
   /*  const [text, setText] = useState({
     text: "",
@@ -31,7 +42,7 @@ const MySearchHome = ({ jobs, setJobs }) => {
   return (
     <>
       {/* <MyNavBar text={text} setText={setText} getJob={fetchJobs} /> */}
-      <JobStore jobs={jobs} setJobs={setJobs} />
+      <JobStore /* jobs={jobs} */ /* setJobs={setJobs} */ />
     </>
   );
 };
